@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mardur.com: Music, Podcasts & Audio Streaming</title>
+  <link rel="stylesheet" href="style.css" />
+  <!-- Font Awesome for Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+</head>
+<body>
+
+  <!-- DOWNLOAD CODE BAR -->
+  <div class="download-bar">
+    <span><i class="fa-solid fa-code"></i> Developer Mode: Save Project Files</span>
+    <button onclick="downloadFile('index.html', htmlCode, 'text/html')"><i class="fa-solid fa-file-code"></i> Download index.html</button>
+    <button onclick="downloadFile('style.css', cssCode, 'text/css')"><i class="fa-solid fa-file-code"></i> Download style.css</button>
+    <button onclick="downloadFile('script.js', jsCode, 'text/javascript')"><i class="fa-solid fa-file-code"></i> Download script.js</button>
+  </div>
+
+  <!-- AMAZON-STYLE MAIN HEADER -->
+  <header class="header">
+    <div class="nav-left">
+      <a href="#" class="logo">Mardur<span>.music</span></a>
+      <div class="deliver-to">
+        <i class="fa-solid fa-location-dot"></i>
+        <div class="nav-text">
+          <span class="line-1">Deliver to User</span>
+          <span class="line-2">Listening HQ</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- SEARCH BAR -->
+    <div class="search-bar">
+      <select class="search-select">
+        <option>All Music</option>
+        <option>Playlists</option>
+        <option>Artists</option>
+        <option>Podcasts</option>
+      </select>
+      <input type="text" placeholder="Search songs, artists, albums, or podcasts..." />
+      <button class="search-btn"><i class="fa-solid fa-magnifying-glass"></i></button>
+    </div>
+
+    <div class="nav-right">
+      <div class="nav-item">
+        <span class="line-1">Hello, Listener</span>
+        <span class="line-2">Account & Playlists <i class="fa-solid fa-caret-down"></i></span>
+      </div>
+      <div class="nav-item">
+        <span class="line-1">Returns</span>
+        <span class="line-2">& History</span>
+      </div>
+      <div class="nav-cart">
+        <i class="fa-solid fa-layer-group"></i>
+        <span class="cart-count">12</span>
+        <span class="cart-text">Queue</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- SUB NAVIGATION -->
+  <nav class="sub-nav">
+    <ul>
+      <li><a href="#"><i class="fa-solid fa-bars"></i> All Categories</a></li>
+      <li><a href="#">Mardur Prime Music</a></li>
+      <li><a href="#">Best Sellers</a></li>
+      <li><a href="#">New Releases</a></li>
+      <li><a href="#">Top Charts</a></li>
+      <li><a href="#">Podcasts & Shows</a></li>
+      <li><a href="#">Radio Stations</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO BANNER -->
+  <section class="hero-banner">
+    <div class="hero-content">
+      <h2>Mardur Prime Music Unlimited</h2>
+      <p>Stream over 100 million songs ad-free, with offline playback and spatial audio.</p>
+      <button class="cta-btn">Start 30-Day Free Trial</button>
+    </div>
+  </section>
+
+  <!-- MAIN PRODUCT GRID -->
+  <main class="container">
+    <h2 class="section-title">Best Sellers in Trending Music</h2>
+
+    <div class="product-grid">
+
+      <!-- MUSIC ITEM CARD 1 -->
+      <div class="product-card">
+        <div class="badge">#1 Best Seller</div>
+        <img src="https://picsum.photos/300/300?random=1" alt="Album Cover" />
+        <h3 class="song-title">Midnight Melodies</h3>
+        <p class="artist-name">By The Echoes</p>
+        <div class="rating">
+          <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star-half-stroke"></i>
+          <span>(14,209)</span>
+        </div>
+        <div class="price-tag"><span class="prime-badge"><i class="fa-solid fa-check"></i> prime</span> Included with Prime</div>
+        <button class="play-btn" onclick="playTrack('Midnight Melodies', 'The Echoes', 'https://picsum.photos/300/300?random=1')">
+          <i class="fa-solid fa-play"></i> Play Now
+        </button>
+      </div>
+
+      <!-- MUSIC ITEM CARD 2 -->
+      <div class="product-card">
+        <div class="badge">Top Release</div>
+        <img src="https://picsum.photos/300/300?random=2" alt="Album Cover" />
+        <h3 class="song-title">Neon Pulse</h3>
+        <p class="artist-name">By Synthwave Collective</p>
+        <div class="rating">
+          <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+          <span>(8,940)</span>
+        </div>
+        <div class="price-tag"><span class="prime-badge"><i class="fa-solid fa-check"></i> prime</span> Included with Prime</div>
+        <button class="play-btn" onclick="playTrack('Neon Pulse', 'Synthwave Collective', 'https://picsum.photos/300/300?random=2')">
+          <i class="fa-solid fa-play"></i> Play Now
+        </button>
+      </div>
+
+      <!-- MUSIC ITEM CARD 3 -->
+      <div class="product-card">
+        <img src="https://picsum.photos/300/300?random=3" alt="Album Cover" />
+        <h3 class="song-title">Acoustic Sunsets</h3>
+        <p class="artist-name">By Clara Rivera</p>
+        <div class="rating">
+          <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-regular fa-star"></i>
+          <span>(3,112)</span>
+        </div>
+        <div class="price-tag"><span class="prime-badge"><i class="fa-solid fa-check"></i> prime</span> Included with Prime</div>
+        <button class="play-btn" onclick="playTrack('Acoustic Sunsets', 'Clara Rivera', 'https://picsum.photos/300/300?random=3')">
+          <i class="fa-solid fa-play"></i> Play Now
+        </button>
+      </div>
+
+      <!-- MUSIC ITEM CARD 4 -->
+      <div class="product-card">
+        <div class="badge">Popular Podcast</div>
+        <img src="https://picsum.photos/300/300?random=4" alt="Album Cover" />
+        <h3 class="song-title">The Daily Tech Wire</h3>
+        <p class="artist-name">By Tech Media</p>
+        <div class="rating">
+          <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+          <span>(45,100)</span>
+        </div>
+        <div class="price-tag"><span class="prime-badge"><i class="fa-solid fa-check"></i> prime</span> Included with Prime</div>
+        <button class="play-btn" onclick="playTrack('The Daily Tech Wire', 'Tech Media', 'https://picsum.photos/300/300?random=4')">
+          <i class="fa-solid fa-play"></i> Play Episode
+        </button>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- STICKY BOTTOM SPOTIFY-STYLE PLAYER WITH AMAZON THEMING -->
+  <div class="player-bar">
+    <div class="now-playing">
+      <img id="player-img" src="https://picsum.photos/300/300?random=1" alt="Track Art" />
+      <div class="track-info">
+        <span id="player-title" class="title">Midnight Melodies</span>
+        <span id="player-artist" class="artist">The Echoes</span>
+      </div>
+    </div>
+
+    <div class="player-controls">
+      <div class="control-buttons">
+        <button><i class="fa-solid fa-shuffle"></i></button>
+        <button><i class="fa-solid fa-backward-step"></i></button>
+        <button id="main-play-btn" class="play-circle" onclick="togglePlay()"><i class="fa-solid fa-pause"></i></button>
+        <button><i class="fa-solid fa-forward-step"></i></button>
+        <button><i class="fa-solid fa-repeat"></i></button>
+      </div>
+      <div class="playback-bar">
+        <span class="time">1:15</span>
+        <div class="progress-container">
+          <div class="progress-bar"></div>
+        </div>
+        <span class="time">3:45</span>
+      </div>
+    </div>
+
+    <div class="volume-controls">
+      <i class="fa-solid fa-volume-high"></i>
+      <input type="range" min="0" max="100" value="70" class="volume-slider" />
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
