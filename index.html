@@ -5,20 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Mardur.com: Music, Podcasts & Audio Streaming</title>
   <link rel="stylesheet" href="style.css" />
-  <!-- Font Awesome for Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
 </head>
 <body>
 
-  <!-- DOWNLOAD CODE BAR -->
-  <div class="download-bar">
-    <span><i class="fa-solid fa-code"></i> Developer Mode: Save Project Files</span>
-    <button onclick="downloadFile('index.html', htmlCode, 'text/html')"><i class="fa-solid fa-file-code"></i> Download index.html</button>
-    <button onclick="downloadFile('style.css', cssCode, 'text/css')"><i class="fa-solid fa-file-code"></i> Download style.css</button>
-    <button onclick="downloadFile('script.js', jsCode, 'text/javascript')"><i class="fa-solid fa-file-code"></i> Download script.js</button>
-  </div>
-
-  <!-- AMAZON-STYLE MAIN HEADER -->
   <header class="header">
     <div class="nav-left">
       <a href="#" class="logo">Mardur<span>.music</span></a>
@@ -31,7 +21,6 @@
       </div>
     </div>
 
-    <!-- SEARCH BAR -->
     <div class="search-bar">
       <select class="search-select">
         <option>All Music</option>
@@ -60,7 +49,6 @@
     </div>
   </header>
 
-  <!-- SUB NAVIGATION -->
   <nav class="sub-nav">
     <ul>
       <li><a href="#"><i class="fa-solid fa-bars"></i> All Categories</a></li>
@@ -73,7 +61,6 @@
     </ul>
   </nav>
 
-  <!-- HERO BANNER -->
   <section class="hero-banner">
     <div class="hero-content">
       <h2>Mardur Prime Music Unlimited</h2>
@@ -82,13 +69,11 @@
     </div>
   </section>
 
-  <!-- MAIN PRODUCT GRID -->
   <main class="container">
     <h2 class="section-title">Best Sellers in Trending Music</h2>
 
     <div class="product-grid">
 
-      <!-- MUSIC ITEM CARD 1 -->
       <div class="product-card">
         <div class="badge">#1 Best Seller</div>
         <img src="https://picsum.photos/300/300?random=1" alt="Album Cover" />
@@ -104,7 +89,6 @@
         </button>
       </div>
 
-      <!-- MUSIC ITEM CARD 2 -->
       <div class="product-card">
         <div class="badge">Top Release</div>
         <img src="https://picsum.photos/300/300?random=2" alt="Album Cover" />
@@ -120,7 +104,6 @@
         </button>
       </div>
 
-      <!-- MUSIC ITEM CARD 3 -->
       <div class="product-card">
         <img src="https://picsum.photos/300/300?random=3" alt="Album Cover" />
         <h3 class="song-title">Acoustic Sunsets</h3>
@@ -135,7 +118,6 @@
         </button>
       </div>
 
-      <!-- MUSIC ITEM CARD 4 -->
       <div class="product-card">
         <div class="badge">Popular Podcast</div>
         <img src="https://picsum.photos/300/300?random=4" alt="Album Cover" />
@@ -154,7 +136,6 @@
     </div>
   </main>
 
-  <!-- STICKY BOTTOM SPOTIFY-STYLE PLAYER WITH AMAZON THEMING -->
   <div class="player-bar">
     <div class="now-playing">
       <img id="player-img" src="https://picsum.photos/300/300?random=1" alt="Track Art" />
