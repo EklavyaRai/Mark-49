@@ -11,7 +11,7 @@
 
   <header class="header">
     <div class="nav-left">
-      <a href="#" class="logo">Madhur<span>.music</span></a>
+      <a href="#" class="logo">Madhur<span>.mp3</span></a>
       <div class="deliver-to">
         <i class="fa-solid fa-location-dot"></i>
         <div class="nav-text">
@@ -75,19 +75,21 @@
     <div class="product-grid">
 
       <div class="product-card">
-        <div class="badge">#1 Best Seller</div>
-        <img src="https://picsum.photos/300/300?random=1" alt="Album Cover" />
-        <h3 class="song-title">Midnight Melodies</h3>
-        <p class="artist-name">By The Echoes</p>
-        <div class="rating">
-          <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star-half-stroke"></i>
-          <span>(14,209)</span>
-        </div>
-        <div class="price-tag"><span class="prime-badge"><i class="fa-solid fa-check"></i> prime</span> Included with Prime</div>
-        <button class="play-btn" onclick="playTrack('Midnight Melodies', 'The Echoes', 'https://picsum.photos/300/300?random=1')">
-          <i class="fa-solid fa-play"></i> Play Now
-        </button>
-      </div>
+  <div class="badge">#1 Trending</div>
+  
+  <!-- CHANGE 1: Update image src -->
+  <img src="Low Fade.jpg" alt="Low Fade Album Cover" />
+  
+  <h3 class="song-title">Low Fade</h3>
+  <p class="artist-name">By The Echoes</p>
+  
+  <!-- ... rating and price tags ... -->
+
+  <!-- CHANGE 2: Add audio file path as the 4th argument in playTrack() -->
+  <button class="play-btn" onclick="playTrack('Low Fade', 'The Echoes', 'Low Fade.jpg', 'audio/Low Fadee.mp3')">
+    <i class="fa-solid fa-play"></i> Play Now
+  </button>
+</div>
 
       <div class="product-card">
         <div class="badge">Top Release</div>
@@ -140,7 +142,7 @@
     <div class="now-playing">
       <img id="player-img" src="https://picsum.photos/300/300?random=1" alt="Track Art" />
       <div class="track-info">
-        <span id="player-title" class="title">Midnight Melodies</span>
+        <span id="player-title" class="title">Low Fade</span>
         <span id="player-artist" class="artist">The Echoes</span>
       </div>
     </div>
