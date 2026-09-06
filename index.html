@@ -74,63 +74,65 @@
 
     <div class="product-grid">
 
+      <!-- Track 1: Low Fade -->
       <div class="product-card">
-  <div class="badge">#1 Trending</div>
-  
-  <!-- CHANGE 1: Update image src -->
-  <img src="Low Fade.jpg" alt="Low Fade Album Cover" />
-  
-  <h3 class="song-title">Low Fade</h3>
-  <p class="artist-name">Karan Aujla</p>
-  
-  <!-- ... rating and price tags ... -->
+        <div class="badge">#1 Trending</div>
+        <img src="images/Low Fade.jpg" alt="Low Fade Cover" />
+        <h3 class="song-title">Low Fade</h3>
+        <p class="artist-name">Karan Aujla</p>
+        <div class="rating">
+          <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+          <span>(18,450)</span>
+        </div>
+        <div class="price-tag"><span class="prime-badge"><i class="fa-solid fa-check"></i> prime</span> Included with Prime</div>
+        <button class="play-btn" onclick="playTrack('Low Fade', 'Karan Aujla', 'images/Low Fade.jpg', 'audio/Low Fadee.mp3')">
+          <i class="fa-solid fa-play"></i> Play Now
+        </button>
+      </div>
 
-  <!-- CHANGE 2: Add audio file path as the 4th argument in playTrack() -->
-  <button class="play-btn" onclick="playTrack('Low Fade', 'Karan Aujla', 'Low Fade.jpg', 'audio/Low Fadee.mp3')">
-    <i class="fa-solid fa-play"></i> Play Now
-  </button>
-</div>
-
+      <!-- Track 2: Neon Pulse -->
       <div class="product-card">
         <div class="badge">Top Release</div>
         <img src="https://picsum.photos/300/300?random=2" alt="Album Cover" />
         <h3 class="song-title">Neon Pulse</h3>
-        <p class="artist-name">By Synthwave Collective</p>
+        <p class="artist-name">Synthwave Collective</p>
         <div class="rating">
           <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
           <span>(8,940)</span>
         </div>
         <div class="price-tag"><span class="prime-badge"><i class="fa-solid fa-check"></i> prime</span> Included with Prime</div>
-        <button class="play-btn" onclick="playTrack('Neon Pulse', 'Synthwave Collective', 'https://picsum.photos/300/300?random=2')">
+        <button class="play-btn" onclick="playTrack('Neon Pulse', 'Synthwave Collective', 'https://picsum.photos/300/300?random=2', 'audio/Low Fadee.mp3')">
           <i class="fa-solid fa-play"></i> Play Now
         </button>
       </div>
 
+      <!-- Track 3: Acoustic Sunsets -->
       <div class="product-card">
         <img src="https://picsum.photos/300/300?random=3" alt="Album Cover" />
         <h3 class="song-title">Acoustic Sunsets</h3>
-        <p class="artist-name">By Clara Rivera</p>
+        <p class="artist-name">Clara Rivera</p>
         <div class="rating">
           <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-regular fa-star"></i>
           <span>(3,112)</span>
         </div>
         <div class="price-tag"><span class="prime-badge"><i class="fa-solid fa-check"></i> prime</span> Included with Prime</div>
-        <button class="play-btn" onclick="playTrack('Acoustic Sunsets', 'Clara Rivera', 'https://picsum.photos/300/300?random=3')">
+        <button class="play-btn" onclick="playTrack('Acoustic Sunsets', 'Clara Rivera', 'https://picsum.photos/300/300?random=3', 'audio/Low Fadee.mp3')">
           <i class="fa-solid fa-play"></i> Play Now
         </button>
       </div>
 
+      <!-- Track 4: The Daily Tech Wire -->
       <div class="product-card">
         <div class="badge">Popular Podcast</div>
         <img src="https://picsum.photos/300/300?random=4" alt="Album Cover" />
         <h3 class="song-title">The Daily Tech Wire</h3>
-        <p class="artist-name">By Tech Media</p>
+        <p class="artist-name">Tech Media</p>
         <div class="rating">
           <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
           <span>(45,100)</span>
         </div>
         <div class="price-tag"><span class="prime-badge"><i class="fa-solid fa-check"></i> prime</span> Included with Prime</div>
-        <button class="play-btn" onclick="playTrack('The Daily Tech Wire', 'Tech Media', 'https://picsum.photos/300/300?random=4')">
+        <button class="play-btn" onclick="playTrack('The Daily Tech Wire', 'Tech Media', 'https://picsum.photos/300/300?random=4', 'audio/Low Fadee.mp3')">
           <i class="fa-solid fa-play"></i> Play Episode
         </button>
       </div>
@@ -140,7 +142,7 @@
 
   <div class="player-bar">
     <div class="now-playing">
-      <img id="player-img" src="https://picsum.photos/300/300?random=1" alt="Track Art" />
+      <img id="player-img" src="images/Low Fade.jpg" alt="Track Art" />
       <div class="track-info">
         <span id="player-title" class="title">Low Fade</span>
         <span id="player-artist" class="artist">Karan Aujla</span>
@@ -151,16 +153,16 @@
       <div class="control-buttons">
         <button><i class="fa-solid fa-shuffle"></i></button>
         <button><i class="fa-solid fa-backward-step"></i></button>
-        <button id="main-play-btn" class="play-circle" onclick="togglePlay()"><i class="fa-solid fa-pause"></i></button>
+        <button id="main-play-btn" class="play-circle" onclick="togglePlay()"><i class="fa-solid fa-play"></i></button>
         <button><i class="fa-solid fa-forward-step"></i></button>
         <button><i class="fa-solid fa-repeat"></i></button>
       </div>
       <div class="playback-bar">
-        <span class="time">1:15</span>
+        <span class="time">0:00</span>
         <div class="progress-container">
           <div class="progress-bar"></div>
         </div>
-        <span class="time">3:45</span>
+        <span class="time">0:00</span>
       </div>
     </div>
 
