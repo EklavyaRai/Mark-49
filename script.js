@@ -1,210 +1,144 @@
-// TRACK PLAYLIST DATA
-const playlist = [
-  {
-    id: 0,
-    title: "Low Fade",
-    artist: "Karan Aujla",
-    imgSrc: "images/Low Fade.jpg",
-    audioSrc: "audio/Low Fadee.mp3",
-    badge: "#1 Trending",
-    rating: "(18,450)"
-  },
+const tracks = [
   {
     id: 1,
-    title: "Neon Pulse",
-    artist: "Synthwave Collective",
-    imgSrc: "https://picsum.photos/300/300?random=2",
-    audioSrc: "audio/Low Fadee.mp3", // Replace with distinct audio file paths as available
-    badge: "Top Release",
-    rating: "(8,940)"
+    title: "Acoustic Breeze",
+    artist: "Benjamin Tissot",
+    badge: "Overall Pick",
+    rating: "⭐⭐⭐⭐⭐ (1,240)",
+    cover: "https://picsum.photos/seed/track1/200/200",
+    src: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"
   },
   {
     id: 2,
-    title: "Acoustic Sunsets",
-    artist: "Clara Rivera",
-    imgSrc: "https://picsum.photos/300/300?random=3",
-    audioSrc: "audio/Low Fadee.mp3",
-    badge: "",
-    rating: "(3,112)"
+    title: "Electronic Groove",
+    artist: "Creative Sounds",
+    badge: "#1 Best Seller",
+    rating: "⭐⭐⭐⭐☆ (850)",
+    cover: "https://picsum.photos/seed/track2/200/200",
+    src: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3"
   },
   {
     id: 3,
-    title: "The Daily Tech Wire",
-    artist: "Tech Media",
-    imgSrc: "https://picsum.photos/300/300?random=4",
-    audioSrc: "audio/Low Fadee.mp3",
-    badge: "Popular Podcast",
-    rating: "(45,100)"
+    title: "Urban Rhythm",
+    artist: "Street Beats Studio",
+    badge: "Prime Exclusive",
+    rating: "⭐⭐⭐⭐⭐ (3,110)",
+    cover: "https://picsum.photos/seed/track3/200/200",
+    src: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3"
+  },
+  {
+    id: 4,
+    title: "Ambient Horizon",
+    artist: "Lunar Wave",
+    badge: "New Release",
+    rating: "⭐⭐⭐⭐☆ (420)",
+    cover: "https://picsum.photos/seed/track4/200/200",
+    src: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-4.mp3"
   }
 ];
 
-// STATE MANAGEMENT
 let currentTrackIndex = 0;
 let isPlaying = false;
-let isShuffle = false;
-let isRepeat = false;
 
-const audio = new Audio();
+const audio = document.getElementById('audio-player');
+const playBtn = document.getElementById('play-btn');
+const prevBtn = document.getElementById('prev-btn');
+const nextBtn = document.getElementById('next-btn');
+const seekBar = document.getElementById('seek-bar');
+const volumeBar = document.getElementById('volume-bar');
+const currentTitle = document.getElementById('current-title');
+const currentArtist = document.getElementById('current-artist');
+const currentCover = document.getElementById('current-cover');
+const currentTimeEl = document.getElementById('current-time');
+const durationTimeEl = document.getElementById('duration-time');
+const catalogContainer = document.getElementById('catalog');
 
-// DOM ELEMENTS
-const mainPlayBtn = document.getElementById("main-play-btn");
-const volumeSlider = document.getElementById("volume-slider");
-const progressBar = document.getElementById("progress-bar");
-const progressContainer = document.getElementById("progress-container");
-const currentTimeEl = document.getElementById("current-time");
-const durationTimeEl = document.getElementById("duration-time");
-const productGrid = document.getElementById("product-grid");
-const shuffleBtn = document.getElementById("shuffle-btn");
-const repeatBtn = document.getElementById("repeat-btn");
-
-// INITIALIZE PLAYER & CARDS
-function initApp() {
-  renderCards();
-  loadTrack(currentTrackIndex, false);
-  audio.volume = 0.7;
-}
-
-// RENDER PRODUCT CARDS DYNAMICALLY
-function renderCards() {
-  productGrid.innerHTML = "";
-  playlist.forEach((track, index) => {
-    const card = document.createElement("div");
-    card.className = `product-card ${index === currentTrackIndex ? 'active-track' : ''}`;
-    card.innerHTML = `
-      ${track.badge ? `<div class="badge">${track.badge}</div>` : ""}
-      <img src="${track.imgSrc}" alt="${track.title} Cover" />
-      <h3 class="song-title">${track.title}</h3>
-      <p class="artist-name">${track.artist}</p>
-      <div class="rating">
-        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
-        <span>${track.rating}</span>
+// Render Product Cards
+function renderCatalog() {
+  catalogContainer.innerHTML = tracks.map((track, index) => `
+    <div class="product-card">
+      <div>
+        <img src="${track.cover}" class="product-img" alt="${track.title}">
+        <span class="badge">${track.badge}</span>
+        <div class="product-title">${track.title}</div>
+        <div class="product-artist">By ${track.artist}</div>
+        <div class="rating">${track.rating}</div>
       </div>
-      <div class="price-tag"><span class="prime-badge"><i class="fa-solid fa-check"></i> prime</span> Included with Prime</div>
-      <button class="play-btn" onclick="selectAndPlay(${index})">
-        <i class="fa-solid ${index === currentTrackIndex && isPlaying ? 'fa-pause' : 'fa-play'}"></i> 
-        ${index === currentTrackIndex && isPlaying ? 'Pause' : 'Play Now'}
-      </button>
-    `;
-    productGrid.appendChild(card);
-  });
+      <button class="play-btn" onclick="loadAndPlayTrack(${index})">Listen Now</button>
+    </div>
+  `).join('');
 }
 
-// LOAD TRACK DATA
-function loadTrack(index, autoPlay = true) {
+function loadAndPlayTrack(index) {
   currentTrackIndex = index;
-  const track = playlist[currentTrackIndex];
-
-  document.getElementById("player-title").textContent = track.title;
-  document.getElementById("player-artist").textContent = track.artist;
-  document.getElementById("player-img").src = track.imgSrc;
+  const track = tracks[currentTrackIndex];
   
-  audio.src = track.audioSrc;
+  audio.src = track.src;
+  currentTitle.textContent = track.title;
+  currentArtist.textContent = track.artist;
+  currentCover.src = track.cover;
 
-  if (autoPlay) {
-    audio.play();
-    isPlaying = true;
-    updatePlayButton();
-  }
-  renderCards();
+  playTrack();
 }
 
-// TOGGLE PLAY / PAUSE
-function togglePlay() {
+function playTrack() {
+  if (!audio.src) {
+    loadAndPlayTrack(0);
+    return;
+  }
+  audio.play();
+  isPlaying = true;
+  playBtn.textContent = '⏸';
+}
+
+function pauseTrack() {
+  audio.pause();
+  isPlaying = false;
+  playBtn.textContent = '▶';
+}
+
+playBtn.addEventListener('click', () => {
   if (isPlaying) {
-    audio.pause();
-    isPlaying = false;
+    pauseTrack();
   } else {
-    audio.play();
-    isPlaying = true;
+    playTrack();
   }
-  updatePlayButton();
-  renderCards();
-}
+});
 
-function selectAndPlay(index) {
-  if (currentTrackIndex === index) {
-    togglePlay();
-  } else {
-    loadTrack(index, true);
-  }
-}
+prevBtn.addEventListener('click', () => {
+  currentTrackIndex = (currentTrackIndex - 1 + tracks.length) % tracks.length;
+  loadAndPlayTrack(currentTrackIndex);
+});
 
-function updatePlayButton() {
-  if (isPlaying) {
-    mainPlayBtn.innerHTML = '<i class="fa-solid fa-pause"></i>';
-  } else {
-    mainPlayBtn.innerHTML = '<i class="fa-solid fa-play"></i>';
-  }
-}
+nextBtn.addEventListener('click', () => {
+  currentTrackIndex = (currentTrackIndex + 1) % tracks.length;
+  loadAndPlayTrack(currentTrackIndex);
+});
 
-// NEXT & PREVIOUS TRACK CONTROLS
-function nextTrack() {
-  if (isShuffle) {
-    currentTrackIndex = Math.floor(Math.random() * playlist.length);
-  } else {
-    currentTrackIndex = (currentTrackIndex + 1) % playlist.length;
-  }
-  loadTrack(currentTrackIndex, true);
-}
-
-function prevTrack() {
-  currentTrackIndex = (currentTrackIndex - 1 + playlist.length) % playlist.length;
-  loadTrack(currentTrackIndex, true);
-}
-
-// AUDIO EVENT LISTENERS
-audio.addEventListener("timeupdate", () => {
+audio.addEventListener('timeupdate', () => {
   if (audio.duration) {
-    const progressPercent = (audio.currentTime / audio.duration) * 100;
-    progressBar.style.width = `${progressPercent}%`;
+    const progress = (audio.currentTime / audio.duration) * 100;
+    seekBar.value = progress;
     currentTimeEl.textContent = formatTime(audio.currentTime);
+    durationTimeEl.textContent = formatTime(audio.duration);
   }
 });
 
-audio.addEventListener("loadedmetadata", () => {
-  durationTimeEl.textContent = formatTime(audio.duration);
-});
-
-audio.addEventListener("ended", () => {
-  if (isRepeat) {
-    audio.currentTime = 0;
-    audio.play();
-  } else {
-    nextTrack();
-  }
-});
-
-// SEEK CONTROL
-progressContainer.addEventListener("click", (e) => {
-  const width = progressContainer.clientWidth;
-  const clickX = e.offsetX;
+seekBar.addEventListener('input', () => {
   if (audio.duration) {
-    audio.currentTime = (clickX / width) * audio.duration;
+    audio.currentTime = (seekBar.value / 100) * audio.duration;
   }
 });
 
-// VOLUME CONTROL
-volumeSlider.addEventListener("input", (e) => {
-  audio.volume = e.target.value / 100;
+volumeBar.addEventListener('input', () => {
+  audio.volume = volumeBar.value / 100;
 });
 
-// SHUFFLE & REPEAT TOGGLES
-shuffleBtn.addEventListener("click", () => {
-  isShuffle = !isShuffle;
-  shuffleBtn.style.color = isShuffle ? "#febd69" : "#ccc";
-});
-
-repeatBtn.addEventListener("click", () => {
-  isRepeat = !isRepeat;
-  repeatBtn.style.color = isRepeat ? "#febd69" : "#ccc";
-});
-
-// TIME FORMATTER UTILITY
 function formatTime(seconds) {
-  const min = Math.floor(seconds / 60);
-  const sec = Math.floor(seconds % 60);
-  return `${min}:${sec < 10 ? "0" : ""}${sec}`;
+  const mins = Math.floor(seconds / 60);
+  const secs = Math.floor(seconds % 60);
+  return `${mins}:${secs < 10 ? '0' : ''}${secs}`;
 }
 
-// RUN INITIALIZATION
-window.addEventListener("DOMContentLoaded", initApp);
+// Initialize
+renderCatalog();

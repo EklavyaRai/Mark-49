@@ -1,114 +1,126 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Madhur Prime Music</title>
-  <link rel="stylesheet" href="style.css" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AmzMusic - Shop Your Sound</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
-  <header class="header">
-    <div class="nav-left">
-      <a href="#" class="logo">Madhur<span>.mp3</span></a>
-      <div class="deliver-to">
-        <i class="fa-solid fa-location-dot"></i>
-        <div class="nav-text">
-          <span class="line-1">Deliver to User</span>
-          <span class="line-2">Listening HQ</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="search-bar">
+  <!-- Amazon-Style Navigation Header -->
+  <header>
+    <a href="#" class="logo">amz<span>music</span></a>
+    <div class="search-container">
       <select class="search-select">
-        <option>All Music</option>
-        <option>Playlists</option>
-        <option>Artists</option>
-        <option>Podcasts</option>
+        <option>All Genres</option>
+        <option>Pop</option>
+        <option>Rock</option>
+        <option>Hip-Hop</option>
+        <option>Lo-Fi</option>
       </select>
-      <input type="text" id="music-search" placeholder="Search songs, artists, albums, or podcasts..." />
-      <button class="search-btn"><i class="fa-solid fa-magnifying-glass"></i></button>
+      <input type="text" class="search-input" placeholder="Search Prime Music, Artists, or Albums">
+      <button class="search-btn">🔍</button>
     </div>
-
-    <div class="nav-right">
-      <div class="nav-item">
-        <span class="line-1">Hello, Listener</span>
-        <span class="line-2">Account & Playlists <i class="fa-solid fa-caret-down"></i></span>
-      </div>
-      <div class="nav-item">
-        <span class="line-1">Returns</span>
-        <span class="line-2">& History</span>
-      </div>
-      <div class="nav-cart">
-        <i class="fa-solid fa-layer-group"></i>
-        <span class="cart-count">4</span>
-        <span class="cart-text">Queue</span>
-      </div>
+    <div class="nav-item">
+      <span>Hello, Sign in</span>
+      <strong>Account & Lists</strong>
+    </div>
+    <div class="nav-item">
+      <span>Returns</span>
+      <strong>& Orders</strong>
+    </div>
+    <div class="nav-item">
+      <strong>Library 🛒</strong>
     </div>
   </header>
 
-  <nav class="sub-nav">
-    <ul>
-      <li><a href="#"><i class="fa-solid fa-bars"></i> All Categories</a></li>
-      <li><a href="#">Madhur Prime Music</a></li>
-      <li><a href="#">Best Sellers</a></li>
-      <li><a href="#">New Releases</a></li>
-      <li><a href="#">Top Charts</a></li>
-      <li><a href="#">Podcasts & Shows</a></li>
-      <li><a href="#">Radio Stations</a></li>
-    </ul>
-  </nav>
+  <!-- Amazon Sub-Header -->
+  <div class="subnav">
+    <a href="#">Prime Music</a>
+    <a href="#">Podcasts</a>
+    <a href="#">Top Charts</a>
+    <a href="#">New Releases</a>
+    <a href="#">Purchased Tracks</a>
+  </div>
 
-  <section class="hero-banner">
-    <div class="hero-content">
-      <h2>Madhur Prime Music Unlimited</h2>
-      <p>Stream over 100 million songs ad-free, with offline playback and spatial audio.</p>
-      <button class="cta-btn">Start 30-Day Free Trial</button>
-    </div>
-  </section>
+  <!-- Layout Container -->
+  <div class="main-layout">
+    
+    <!-- Sidebar Filters -->
+    <aside class="sidebar">
+      <h4>Prime Music Eligible</h4>
+      <ul>
+        <li><input type="checkbox" checked> Prime Included</li>
+      </ul>
 
-  <main class="container">
-    <h2 class="section-title">Best Sellers in Trending Music</h2>
+      <h4>Departments</h4>
+      <ul>
+        <li>Digital Music</li>
+        <li>Vinyl Records</li>
+        <li>Audiobooks</li>
+        <li>Podcasts</li>
+      </ul>
 
-    <div class="product-grid" id="product-grid">
-      <!-- Dynamic Track Cards Rendered by JavaScript -->
-    </div>
-  </main>
+      <h4>Genre</h4>
+      <ul>
+        <li>Pop & Dance</li>
+        <li>Classic Rock</li>
+        <li>Hip-Hop & Rap</li>
+        <li>Indie & Alternative</li>
+        <li>Electronic</li>
+      </ul>
 
-  <!-- BOTTOM AUDIO PLAYER -->
+      <h4>Customer Review</h4>
+      <ul>
+        <li>⭐⭐⭐⭐☆ & Up</li>
+        <li>⭐⭐⭐☆☆ & Up</li>
+      </ul>
+    </aside>
+
+    <!-- Main Music Catalog -->
+    <main class="content-area">
+      <div class="results-header">
+        1-4 of over 10,000 results for <strong style="color: #c7511f;">"Top Trending Tracks"</strong>
+      </div>
+
+      <div class="product-grid" id="catalog">
+        <!-- Dynamic Music Cards Injected via JS -->
+      </div>
+    </main>
+  </div>
+
+  <!-- Fixed Bottom Audio Player Bar -->
   <div class="player-bar">
     <div class="now-playing">
-      <img id="player-img" src="images/Low Fade.jpg" alt="Track Art" />
+      <img id="current-cover" src="https://via.placeholder.com/50" alt="Cover">
       <div class="track-info">
-        <span id="player-title" class="title">Low Fade</span>
-        <span id="player-artist" class="artist">Karan Aujla</span>
+        <div class="track-title" id="current-title">No Track Selected</div>
+        <div class="track-artist" id="current-artist">Select a track to start playing</div>
       </div>
     </div>
 
     <div class="player-controls">
       <div class="control-buttons">
-        <button id="shuffle-btn" title="Toggle Shuffle"><i class="fa-solid fa-shuffle"></i></button>
-        <button id="prev-btn" onclick="prevTrack()" title="Previous Track"><i class="fa-solid fa-backward-step"></i></button>
-        <button id="main-play-btn" class="play-circle" onclick="togglePlay()" title="Play/Pause"><i class="fa-solid fa-play"></i></button>
-        <button id="next-btn" onclick="nextTrack()" title="Next Track"><i class="fa-solid fa-forward-step"></i></button>
-        <button id="repeat-btn" title="Toggle Repeat"><i class="fa-solid fa-repeat"></i></button>
+        <button class="ctrl-btn" id="prev-btn">⏮</button>
+        <button class="ctrl-btn play" id="play-btn">▶</button>
+        <button class="ctrl-btn" id="next-btn">⏭</button>
       </div>
-      <div class="playback-bar">
-        <span class="time" id="current-time">0:00</span>
-        <div class="progress-container" id="progress-container">
-          <div class="progress-bar" id="progress-bar"></div>
-        </div>
-        <span class="time" id="duration-time">0:00</span>
+      <div class="progress-container">
+        <span id="current-time">0:00</span>
+        <input type="range" id="seek-bar" class="progress-bar" value="0" max="100">
+        <span id="duration-time">0:00</span>
       </div>
     </div>
 
     <div class="volume-controls">
-      <i class="fa-solid fa-volume-high" id="volume-icon"></i>
-      <input type="range" min="0" max="100" value="70" class="volume-slider" id="volume-slider" />
+      <span>🔊</span>
+      <input type="range" id="volume-bar" class="progress-bar volume-bar" value="80" max="100">
     </div>
   </div>
+
+  <!-- Audio Element -->
+  <audio id="audio-player"></audio>
 
   <script src="script.js"></script>
 </body>
