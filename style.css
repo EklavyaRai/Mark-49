@@ -20,32 +20,7 @@
 
 body {
   background-color: var(--light-gray);
-  padding-bottom: 90px; /* Offset for sticky audio player */
-}
-
-/* DEVELOPER DOWNLOAD BAR */
-.download-bar {
-  background-color: #333;
-  color: #fff;
-  padding: 8px 20px;
-  display: flex;
-  align-items: center;
-  gap: 15px;
-  font-size: 13px;
-}
-
-.download-bar button {
-  background: #0073e6;
-  color: white;
-  border: none;
-  padding: 5px 10px;
-  border-radius: 3px;
-  cursor: pointer;
-  font-weight: bold;
-}
-
-.download-bar button:hover {
-  background: #005bb5;
+  padding-bottom: 90px;
 }
 
 /* HEADER */
@@ -233,6 +208,12 @@ body {
   display: flex;
   flex-direction: column;
   position: relative;
+  border: 2px solid transparent;
+  transition: border-color 0.2s ease;
+}
+
+.product-card.active-track {
+  border-color: var(--amazon-yellow);
 }
 
 .badge {
@@ -311,7 +292,7 @@ body {
   background-color: var(--amazon-btn-hover);
 }
 
-/* BOTTOM AUDIO PLAYER (SPOTIFY FUNCTIONALITY + AMAZON LOOK) */
+/* BOTTOM AUDIO PLAYER */
 .player-bar {
   position: fixed;
   bottom: 0;
@@ -376,6 +357,7 @@ body {
   color: #ccc;
   font-size: 16px;
   cursor: pointer;
+  transition: color 0.2s ease;
 }
 
 .control-buttons button:hover {
@@ -411,13 +393,15 @@ body {
   height: 4px;
   background-color: #444;
   border-radius: 2px;
-  overflow: hidden;
+  cursor: pointer;
+  position: relative;
 }
 
 .progress-bar {
-  width: 35%;
+  width: 0%;
   height: 100%;
   background-color: var(--amazon-yellow);
+  border-radius: 2px;
 }
 
 .volume-controls {

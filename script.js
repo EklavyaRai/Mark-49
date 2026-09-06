@@ -1,119 +1,210 @@
-// TRACK STATE
-let isPlaying = false; // Starts paused by default
-const audio = new Audio("audio/Low Fadee.mp3"); // Initial default track
+// TRACK PLAYLIST DATA
+const playlist = [
+  {
+    id: 0,
+    title: "Low Fade",
+    artist: "Karan Aujla",
+    imgSrc: "images/Low Fade.jpg",
+    audioSrc: "audio/Low Fadee.mp3",
+    badge: "#1 Trending",
+    rating: "(18,450)"
+  },
+  {
+    id: 1,
+    title: "Neon Pulse",
+    artist: "Synthwave Collective",
+    imgSrc: "https://picsum.photos/300/300?random=2",
+    audioSrc: "audio/Low Fadee.mp3", // Replace with distinct audio file paths as available
+    badge: "Top Release",
+    rating: "(8,940)"
+  },
+  {
+    id: 2,
+    title: "Acoustic Sunsets",
+    artist: "Clara Rivera",
+    imgSrc: "https://picsum.photos/300/300?random=3",
+    audioSrc: "audio/Low Fadee.mp3",
+    badge: "",
+    rating: "(3,112)"
+  },
+  {
+    id: 3,
+    title: "The Daily Tech Wire",
+    artist: "Tech Media",
+    imgSrc: "https://picsum.photos/300/300?random=4",
+    audioSrc: "audio/Low Fadee.mp3",
+    badge: "Popular Podcast",
+    rating: "(45,100)"
+  }
+];
+
+// STATE MANAGEMENT
+let currentTrackIndex = 0;
+let isPlaying = false;
+let isShuffle = false;
+let isRepeat = false;
+
+const audio = new Audio();
 
 // DOM ELEMENTS
 const mainPlayBtn = document.getElementById("main-play-btn");
-const volumeSlider = document.querySelector(".volume-slider");
-const progressBar = document.querySelector(".progress-bar");
-const progressContainer = document.querySelector(".progress-container");
-const timeDisplays = document.querySelectorAll(".playback-bar .time"); // [0] = current time, [1] = duration
+const volumeSlider = document.getElementById("volume-slider");
+const progressBar = document.getElementById("progress-bar");
+const progressContainer = document.getElementById("progress-container");
+const currentTimeEl = document.getElementById("current-time");
+const durationTimeEl = document.getElementById("duration-time");
+const productGrid = document.getElementById("product-grid");
+const shuffleBtn = document.getElementById("shuffle-btn");
+const repeatBtn = document.getElementById("repeat-btn");
 
-// Set initial volume to match default slider position (70%)
-audio.volume = 0.7;
+// INITIALIZE PLAYER & CARDS
+function initApp() {
+  renderCards();
+  loadTrack(currentTrackIndex, false);
+  audio.volume = 0.7;
+}
 
-// TOGGLE PLAY/PAUSE FUNCTION
+// RENDER PRODUCT CARDS DYNAMICALLY
+function renderCards() {
+  productGrid.innerHTML = "";
+  playlist.forEach((track, index) => {
+    const card = document.createElement("div");
+    card.className = `product-card ${index === currentTrackIndex ? 'active-track' : ''}`;
+    card.innerHTML = `
+      ${track.badge ? `<div class="badge">${track.badge}</div>` : ""}
+      <img src="${track.imgSrc}" alt="${track.title} Cover" />
+      <h3 class="song-title">${track.title}</h3>
+      <p class="artist-name">${track.artist}</p>
+      <div class="rating">
+        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+        <span>${track.rating}</span>
+      </div>
+      <div class="price-tag"><span class="prime-badge"><i class="fa-solid fa-check"></i> prime</span> Included with Prime</div>
+      <button class="play-btn" onclick="selectAndPlay(${index})">
+        <i class="fa-solid ${index === currentTrackIndex && isPlaying ? 'fa-pause' : 'fa-play'}"></i> 
+        ${index === currentTrackIndex && isPlaying ? 'Pause' : 'Play Now'}
+      </button>
+    `;
+    productGrid.appendChild(card);
+  });
+}
+
+// LOAD TRACK DATA
+function loadTrack(index, autoPlay = true) {
+  currentTrackIndex = index;
+  const track = playlist[currentTrackIndex];
+
+  document.getElementById("player-title").textContent = track.title;
+  document.getElementById("player-artist").textContent = track.artist;
+  document.getElementById("player-img").src = track.imgSrc;
+  
+  audio.src = track.audioSrc;
+
+  if (autoPlay) {
+    audio.play();
+    isPlaying = true;
+    updatePlayButton();
+  }
+  renderCards();
+}
+
+// TOGGLE PLAY / PAUSE
 function togglePlay() {
-  if (!audio.src) return;
-
   if (isPlaying) {
     audio.pause();
-    if (mainPlayBtn) mainPlayBtn.innerHTML = '<i class="fa-solid fa-play"></i>';
     isPlaying = false;
   } else {
     audio.play();
-    if (mainPlayBtn) mainPlayBtn.innerHTML = '<i class="fa-solid fa-pause"></i>';
     isPlaying = true;
   }
+  updatePlayButton();
+  renderCards();
 }
 
-// CHANGE TRACK FUNCTION
-function playTrack(
-  title = "Low Fade", 
-  artist = "Unknown Artist", 
-  imgSrc = "images/Low Fade.jpg", 
-  audioSrc = "audio/Low Fadee.mp3"
-) {
-  const titleEl = document.getElementById("player-title");
-  const artistEl = document.getElementById("player-artist");
-  const imgEl = document.getElementById("player-img");
-
-  if (titleEl) titleEl.textContent = title;
-  if (artistEl) artistEl.textContent = artist;
-  if (imgEl) imgEl.src = imgSrc;
-  
-  // Update audio source and play
-  audio.src = audioSrc;
-  audio.play();
-  
-  // Reset state to playing
-  isPlaying = true;
-  if (mainPlayBtn) mainPlayBtn.innerHTML = '<i class="fa-solid fa-pause"></i>';
+function selectAndPlay(index) {
+  if (currentTrackIndex === index) {
+    togglePlay();
+  } else {
+    loadTrack(index, true);
+  }
 }
 
-// --- AUDIO EVENT LISTENERS & CONTROL LOGIC ---
+function updatePlayButton() {
+  if (isPlaying) {
+    mainPlayBtn.innerHTML = '<i class="fa-solid fa-pause"></i>';
+  } else {
+    mainPlayBtn.innerHTML = '<i class="fa-solid fa-play"></i>';
+  }
+}
 
-// 1. Update Progress Bar & Current Time during playback
+// NEXT & PREVIOUS TRACK CONTROLS
+function nextTrack() {
+  if (isShuffle) {
+    currentTrackIndex = Math.floor(Math.random() * playlist.length);
+  } else {
+    currentTrackIndex = (currentTrackIndex + 1) % playlist.length;
+  }
+  loadTrack(currentTrackIndex, true);
+}
+
+function prevTrack() {
+  currentTrackIndex = (currentTrackIndex - 1 + playlist.length) % playlist.length;
+  loadTrack(currentTrackIndex, true);
+}
+
+// AUDIO EVENT LISTENERS
 audio.addEventListener("timeupdate", () => {
-  if (audio.duration && progressBar && timeDisplays.length > 0) {
+  if (audio.duration) {
     const progressPercent = (audio.currentTime / audio.duration) * 100;
     progressBar.style.width = `${progressPercent}%`;
-    timeDisplays[0].textContent = formatTime(audio.currentTime);
+    currentTimeEl.textContent = formatTime(audio.currentTime);
   }
 });
 
-// 2. Display total track duration once media is loaded
 audio.addEventListener("loadedmetadata", () => {
-  if (timeDisplays.length > 1) {
-    timeDisplays[1].textContent = formatTime(audio.duration);
+  durationTimeEl.textContent = formatTime(audio.duration);
+});
+
+audio.addEventListener("ended", () => {
+  if (isRepeat) {
+    audio.currentTime = 0;
+    audio.play();
+  } else {
+    nextTrack();
   }
 });
 
-// 3. Click anywhere on progress bar container to Seek
-if (progressContainer) {
-  progressContainer.addEventListener("click", (e) => {
-    const width = progressContainer.clientWidth;
-    const clickX = e.offsetX;
-    if (audio.duration) {
-      audio.currentTime = (clickX / width) * audio.duration;
-    }
-  });
-}
-
-// 4. Adjust Volume via Range Slider
-if (volumeSlider) {
-  volumeSlider.addEventListener("input", (e) => {
-    audio.volume = e.target.value / 100;
-  });
-}
-
-// 5. Automatically reset UI when track completes
-audio.addEventListener("ended", () => {
-  isPlaying = false;
-  if (mainPlayBtn) mainPlayBtn.innerHTML = '<i class="fa-solid fa-play"></i>';
-  if (progressBar) progressBar.style.width = "0%";
-  if (timeDisplays.length > 0) timeDisplays[0].textContent = "0:00";
+// SEEK CONTROL
+progressContainer.addEventListener("click", (e) => {
+  const width = progressContainer.clientWidth;
+  const clickX = e.offsetX;
+  if (audio.duration) {
+    audio.currentTime = (clickX / width) * audio.duration;
+  }
 });
 
-// Helper function to format seconds to M:SS
+// VOLUME CONTROL
+volumeSlider.addEventListener("input", (e) => {
+  audio.volume = e.target.value / 100;
+});
+
+// SHUFFLE & REPEAT TOGGLES
+shuffleBtn.addEventListener("click", () => {
+  isShuffle = !isShuffle;
+  shuffleBtn.style.color = isShuffle ? "#febd69" : "#ccc";
+});
+
+repeatBtn.addEventListener("click", () => {
+  isRepeat = !isRepeat;
+  repeatBtn.style.color = isRepeat ? "#febd69" : "#ccc";
+});
+
+// TIME FORMATTER UTILITY
 function formatTime(seconds) {
   const min = Math.floor(seconds / 60);
   const sec = Math.floor(seconds % 60);
   return `${min}:${sec < 10 ? "0" : ""}${sec}`;
 }
 
-// DOWNLOAD FILE UTILITY FOR USER
-function downloadFile(filename, textContent, mimeType) {
-  const blob = new Blob([textContent], { type: mimeType });
-  const link = document.createElement("a");
-  link.href = URL.createObjectURL(blob);
-  link.download = filename;
-  document.body.appendChild(link);
-  link.click();
-  document.body.removeChild(link);
-}
-
-// STRINGIFIED CODES FOR CLIENT-SIDE DOWNLOADING
-const htmlCode = `<!DOCTYPE html>...`; 
-const cssCode = `/* CSS Stylesheet */...`;
-const jsCode = `/* JS Script */...`;
+// RUN INITIALIZATION
+window.addEventListener("DOMContentLoaded", initApp);

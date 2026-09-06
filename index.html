@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Madhur</title>
+  <title>Madhur Prime Music</title>
   <link rel="stylesheet" href="style.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
 </head>
@@ -28,7 +28,7 @@
         <option>Artists</option>
         <option>Podcasts</option>
       </select>
-      <input type="text" placeholder="Search songs, artists, albums, or podcasts..." />
+      <input type="text" id="music-search" placeholder="Search songs, artists, albums, or podcasts..." />
       <button class="search-btn"><i class="fa-solid fa-magnifying-glass"></i></button>
     </div>
 
@@ -43,7 +43,7 @@
       </div>
       <div class="nav-cart">
         <i class="fa-solid fa-layer-group"></i>
-        <span class="cart-count">12</span>
+        <span class="cart-count">4</span>
         <span class="cart-text">Queue</span>
       </div>
     </div>
@@ -72,74 +72,12 @@
   <main class="container">
     <h2 class="section-title">Best Sellers in Trending Music</h2>
 
-    <div class="product-grid">
-
-      <!-- Track 1: Low Fade -->
-      <div class="product-card">
-        <div class="badge">#1 Trending</div>
-        <img src="images/Low Fade.jpg" alt="Low Fade Cover" />
-        <h3 class="song-title">Low Fade</h3>
-        <p class="artist-name">Karan Aujla</p>
-        <div class="rating">
-          <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
-          <span>(18,450)</span>
-        </div>
-        <div class="price-tag"><span class="prime-badge"><i class="fa-solid fa-check"></i> prime</span> Included with Prime</div>
-        <button class="play-btn" onclick="playTrack('Low Fade', 'Karan Aujla', 'images/Low Fade.jpg', 'audio/Low Fadee.mp3')">
-          <i class="fa-solid fa-play"></i> Play Now
-        </button>
-      </div>
-
-      <!-- Track 2: Neon Pulse -->
-      <div class="product-card">
-        <div class="badge">Top Release</div>
-        <img src="https://picsum.photos/300/300?random=2" alt="Album Cover" />
-        <h3 class="song-title">Neon Pulse</h3>
-        <p class="artist-name">Synthwave Collective</p>
-        <div class="rating">
-          <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
-          <span>(8,940)</span>
-        </div>
-        <div class="price-tag"><span class="prime-badge"><i class="fa-solid fa-check"></i> prime</span> Included with Prime</div>
-        <button class="play-btn" onclick="playTrack('Neon Pulse', 'Synthwave Collective', 'https://picsum.photos/300/300?random=2', 'audio/Low Fadee.mp3')">
-          <i class="fa-solid fa-play"></i> Play Now
-        </button>
-      </div>
-
-      <!-- Track 3: Acoustic Sunsets -->
-      <div class="product-card">
-        <img src="https://picsum.photos/300/300?random=3" alt="Album Cover" />
-        <h3 class="song-title">Acoustic Sunsets</h3>
-        <p class="artist-name">Clara Rivera</p>
-        <div class="rating">
-          <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-regular fa-star"></i>
-          <span>(3,112)</span>
-        </div>
-        <div class="price-tag"><span class="prime-badge"><i class="fa-solid fa-check"></i> prime</span> Included with Prime</div>
-        <button class="play-btn" onclick="playTrack('Acoustic Sunsets', 'Clara Rivera', 'https://picsum.photos/300/300?random=3', 'audio/Low Fadee.mp3')">
-          <i class="fa-solid fa-play"></i> Play Now
-        </button>
-      </div>
-
-      <!-- Track 4: The Daily Tech Wire -->
-      <div class="product-card">
-        <div class="badge">Popular Podcast</div>
-        <img src="https://picsum.photos/300/300?random=4" alt="Album Cover" />
-        <h3 class="song-title">The Daily Tech Wire</h3>
-        <p class="artist-name">Tech Media</p>
-        <div class="rating">
-          <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
-          <span>(45,100)</span>
-        </div>
-        <div class="price-tag"><span class="prime-badge"><i class="fa-solid fa-check"></i> prime</span> Included with Prime</div>
-        <button class="play-btn" onclick="playTrack('The Daily Tech Wire', 'Tech Media', 'https://picsum.photos/300/300?random=4', 'audio/Low Fadee.mp3')">
-          <i class="fa-solid fa-play"></i> Play Episode
-        </button>
-      </div>
-
+    <div class="product-grid" id="product-grid">
+      <!-- Dynamic Track Cards Rendered by JavaScript -->
     </div>
   </main>
 
+  <!-- BOTTOM AUDIO PLAYER -->
   <div class="player-bar">
     <div class="now-playing">
       <img id="player-img" src="images/Low Fade.jpg" alt="Track Art" />
@@ -151,24 +89,24 @@
 
     <div class="player-controls">
       <div class="control-buttons">
-        <button><i class="fa-solid fa-shuffle"></i></button>
-        <button><i class="fa-solid fa-backward-step"></i></button>
-        <button id="main-play-btn" class="play-circle" onclick="togglePlay()"><i class="fa-solid fa-play"></i></button>
-        <button><i class="fa-solid fa-forward-step"></i></button>
-        <button><i class="fa-solid fa-repeat"></i></button>
+        <button id="shuffle-btn" title="Toggle Shuffle"><i class="fa-solid fa-shuffle"></i></button>
+        <button id="prev-btn" onclick="prevTrack()" title="Previous Track"><i class="fa-solid fa-backward-step"></i></button>
+        <button id="main-play-btn" class="play-circle" onclick="togglePlay()" title="Play/Pause"><i class="fa-solid fa-play"></i></button>
+        <button id="next-btn" onclick="nextTrack()" title="Next Track"><i class="fa-solid fa-forward-step"></i></button>
+        <button id="repeat-btn" title="Toggle Repeat"><i class="fa-solid fa-repeat"></i></button>
       </div>
       <div class="playback-bar">
-        <span class="time">0:00</span>
-        <div class="progress-container">
-          <div class="progress-bar"></div>
+        <span class="time" id="current-time">0:00</span>
+        <div class="progress-container" id="progress-container">
+          <div class="progress-bar" id="progress-bar"></div>
         </div>
-        <span class="time">0:00</span>
+        <span class="time" id="duration-time">0:00</span>
       </div>
     </div>
 
     <div class="volume-controls">
-      <i class="fa-solid fa-volume-high"></i>
-      <input type="range" min="0" max="100" value="70" class="volume-slider" />
+      <i class="fa-solid fa-volume-high" id="volume-icon"></i>
+      <input type="range" min="0" max="100" value="70" class="volume-slider" id="volume-slider" />
     </div>
   </div>
 
